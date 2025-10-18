@@ -18,11 +18,39 @@ window.addEventListener("DOMContentLoaded", function() {
     //tracks state of game
     let gameState = Array(9).fill(null);
 
+    const statusDiv = document.getElementById("status");
+
+    function checkWinner() {
+        const winningCombos = [
+            [0, 1, 2]
+            [3, 4, 5]
+            [6, 7, 8]
+            [0, 3, 6]
+            [1, 4, 7]
+            [2, 5, 8]
+            [0, 4, 8]
+            [2, 4, 6]
+        ];
+
+        for (let combo of winningCombos) {
+            const [a, b, c] = combo;
+            if (gameState[a] && gameState[a] === gameState[c]) {
+                const winner = gameState[a];
+                statusDiv.textContent = `Congratulations! ${winner} is the Winner!`;
+                statusDiv.classList.add("you-won");
+                return true;
+            }
+        }
+        return false;
+    }
+
     squares.forEach((square, index) => {
       square.addEventListener('click', () => {
-        if (square.textContent !== '') 
-            return;
-
+        if (square.textContent !== '' || statusDiv.classList.contains("you-won")) 
+                return;
+            
+        
+    
         //updates the square content
         square.textContent = currentPlayer;
 
@@ -32,8 +60,14 @@ window.addEventListener("DOMContentLoaded", function() {
         //updates the game state array
         gameState[index] = currentPlayer;
 
-        //switches players
-        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        //checks for a winner after every move
+        const winnerFound = checkWinner();
+
+        //switches players if ther is no winner yet
+        if (!winnerFound) {
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        }
+        
       });
 
       square.addEventListener('mouseover', () => {
