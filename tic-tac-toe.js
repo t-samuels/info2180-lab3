@@ -20,6 +20,9 @@ window.addEventListener("DOMContentLoaded", function() {
 
     const statusDiv = document.getElementById("status");
 
+    const newGameButton = this.document.querySelector(".btn");
+
+
     function checkWinner() {
         const winningCombos = [
             [0, 1, 2],
@@ -43,6 +46,22 @@ window.addEventListener("DOMContentLoaded", function() {
         }
         return false;
     }
+
+    //resets the game
+    newGameButton.addEventListener("click", () => {
+        gameState = Array(9).fill(null);
+
+        squares.forEach(square => {
+            square.textContent = "";
+            square.classList.remove("X", "O", "hover");
+
+        });
+    
+        statusDiv.textContent = "Move your mouse over a square and click to play an X or O.";
+        statusDiv.classList.remove("you-won");
+
+        currentPlayer = 'X';
+    });
 
     squares.forEach((square, index) => {
       square.addEventListener('click', () => {
@@ -71,7 +90,7 @@ window.addEventListener("DOMContentLoaded", function() {
       });
 
       square.addEventListener('mouseover', () => {
-         if (square.textContent === '') {
+         if (square.textContent === '') && !statusDiv.classList.contains("you-won")) {
             square.classList.add('hover');
         }
     });
