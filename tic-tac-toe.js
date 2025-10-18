@@ -8,17 +8,17 @@ window.addEventListener("DOMContentLoaded", function() {
     boardSquares.forEach(function(square) {
         square.classList.add("square");
     });
-});
-//selects all the squares in the grid
-const squares = document.querySelectorAll('.square');
 
-//keeps track of whose turn it is
-let currentPlayer = 'X';
+    //selects all the squares in the grid
+    const squares = document.querySelectorAll('.square');
 
-//tracks state of game
-let gameState = Array(9).fill(null);
+    //keeps track of whose turn it is
+    let currentPlayer = 'X';
 
-squares.forEach((square, index) => {
+    //tracks state of game
+    let gameState = Array(9).fill(null);
+
+    squares.forEach((square, index) => {
       square.addEventListener('click', () => {
         if (square.textContent !== '') 
             return;
@@ -35,7 +35,17 @@ squares.forEach((square, index) => {
         //switches players
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
       });
-});
 
+      square.addEventListener('mouseover', () => {
+         if (square.textContent === '') {
+            square.classList.add('hover');
+        }
+    });
+
+    square.addEventListener('mouseout', () => {
+        square.classList.remove('hover');
+    });
+  });
+});
 
 
