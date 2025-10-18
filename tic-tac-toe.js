@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
     const statusDiv = document.getElementById("status");
 
-    const newGameButton = this.document.querySelector(".btn");
+    const newGameButton = document.querySelector(".btn");
 
 
     function checkWinner() {
@@ -37,7 +37,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
         for (let combo of winningCombos) {
             const [a, b, c] = combo;
-            if (gameState[a] && gameState[a] === gameState[b] && gameState[c]) {
+            if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
                 const winner = gameState[a];
                 statusDiv.textContent = `Congratulations! ${winner} is the Winner!`;
                 statusDiv.classList.add("you-won");
@@ -90,7 +90,7 @@ window.addEventListener("DOMContentLoaded", function() {
       });
 
       square.addEventListener('mouseover', () => {
-         if (square.textContent === '') && !statusDiv.classList.contains("you-won")) {
+         if (square.textContent === '' && !statusDiv.classList.contains("you-won")) {
             square.classList.add('hover');
         }
     });
