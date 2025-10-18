@@ -32,7 +32,10 @@ squares.forEach((square, index) => {
         //updates the game state array
         gameState[index] = currentPlayer;
 
+        //switches players
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
       });
 });
+
+
 
